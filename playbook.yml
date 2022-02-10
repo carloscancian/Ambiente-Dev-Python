@@ -1,0 +1,38 @@
+  - hosts: terraform-ansible
+    tasks: 
+    - name: Instalando o python 3 e vertualenv
+      apt:
+        pkg:
+        - python3
+        - virtualenv
+        update_cache: yes
+      become: yes
+    - name: Instalando dependencias com pip(Django  e Django Rest)
+      pip: 
+        virtualenv: /home/ubuntu/testeenv/venv
+        name: 
+          - django
+          - djangorestframework
+    - name: Iniciando projeto
+      shell: '. /home/ubuntu/testeenv/venv/bin/activate; django-admin startproject setup /home/ubuntu/testeenv'
+    - name: Alterando o hosts do settings 
+      lineinfile: 
+        path: /home/ubuntu/testeenv/setup/settings.py
+        regexp: 'ALLOWED_HOSTS'
+        line: 'ALLOWED_HOSTS = ["*"]'
+        backrefs: yes
+
+
+
+
+# - hosts: terraform-ansible
+#   tasks:
+#   - name: criando arquivo 
+#     copy: 
+#       dest: /home/ubuntu/index.html
+#       content: <h1>maravilha de teste</h1>
+#   - name: criando servidor
+#     shell: "sudo nohup busybox httpd -f -p 8080 &"
+#   - name: 
+#     shell: "sudo apt update && sudo apt install -y net-tools"
+
