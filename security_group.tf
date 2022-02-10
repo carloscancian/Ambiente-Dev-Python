@@ -7,7 +7,7 @@ resource "aws_security_group" "acesso-ss" {
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = ["177.16.110.174/32"]
+    cidr_blocks      = ["myip/32"]
   }
 
   # ingress {
@@ -28,14 +28,14 @@ resource "aws_security_group" "acesso-ss" {
     from_port        = 8080
     to_port          = 8080
     protocol         = "tcp"
-    cidr_blocks      = ["177.16.110.174/32"]
+    cidr_blocks      = ["myip/32"]
   }
 
   ingress {
     from_port        = 8000
     to_port          = 8000
     protocol         = "tcp"
-    cidr_blocks      = ["177.16.110.174/32"]
+    cidr_blocks      = ["myip/32"]
   }
 
   egress {
